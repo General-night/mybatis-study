@@ -1,6 +1,6 @@
-package com.qc.mapper;
+package com.qc.demo01.mapper;
 
-import com.qc.entity.User;
+import com.qc.demo01.entity.User;
 
 import java.util.List;
 

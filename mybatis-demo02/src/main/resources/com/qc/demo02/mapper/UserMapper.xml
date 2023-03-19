@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.demo02.mapper.UserMapper">
+    <!--int insertUser(User user);-->
+    <insert id="insertUser">
+        insert into t_user values(null, #{username1}, #{password}, #{age}, #{sex}, #{email})
+    </insert>
+
+    <!--List<User> getAllUser();-->
+    <select id="getAllUser" resultType="com.qc.demo02.entity.User">
+        select * from t_user
+    </select>
+
+    <!--User getUserByUsername(String username);-->
+    <select id="getUserByUsername" resultType="com.qc.demo02.entity.User">
+        <!--select * from t_user where username = #{username}-->
+        select * from t_user where username = '${username}'
+    </select>
+
+    <!--User checkLogin(String username, String password);-->
+    <select id="checkLogin" resultType="com.qc.demo02.entity.User">
+        <!--select * from t_user where username = #{arg0} and password = #{arg1}-->
+        <!--select * from t_user where username = #{param1} and password = #{param2}-->
+        select * from t_user where username = #{arg0} and password = #{param2}
+    </select>
+
+    <!--User checkLoginByMap(Map<String, Objects> paramMap);-->
+    <select id="checkLoginByMap" resultType="com.qc.demo02.entity.User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--User checkLoginByParam(@Param("username") String username, @Param("password") String password);-->
+    <select id="checkLoginByParam" resultType="com.qc.demo02.entity.User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--User getUserByCondition(String username, Map<String, Object> paramMap);-->
+    <select id="getUserByCondition" resultType="com.qc.demo02.entity.User">
+        select * from t_user where username = #{arg0} and password = #{param2.password} and age >= #{paramMap.age}
+    </select>
+</mapper>

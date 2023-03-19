@@ -1,6 +1,9 @@
-package com.qc.entity;
+package com.qc.demo02.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户表
@@ -10,6 +13,9 @@ import lombok.Data;
  */
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     /**
      * 主键
@@ -40,4 +46,13 @@ public class User {
      * 邮箱
      */
     private String email;
+
+    public void setUsername1(String username1) {
+
+    }
+
+    public String getUsername1() {
+        
+        return "username1";
+    }
 }

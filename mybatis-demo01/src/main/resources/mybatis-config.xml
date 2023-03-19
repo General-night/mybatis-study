@@ -19,10 +19,10 @@
                     type：设置需要设置别名的类型
                     alias：设置某个类型的别名，若设置该属性则以该值为准，若不设置则以类型名称为准且不区分大小写
         -->
-        <!--<typeAlias type="com.qc.entity.User" alias="User"/>-->
+        <!--<typeAlias type="com.qc.demo01.entity.User" alias="User"/>-->
 
         <!--以包为单位，将包下所有的类型设置默认的类型别名，即类名且不区分大小写-->
-        <package name="com.qc.entity"/>
+        <package name="com.qc.demo01.entity"/>
     </typeAliases>
 
     <!--配置连接数据库的环境-->
@@ -84,6 +84,6 @@
                 1. mapper接口所在的包要和映射文件所在的包一致
                 2. mapper接口要和映射文件的名称一致【只要名字一样就行，大小写不区分】
         -->
-        <package name="com.qc.mapper"/>
+        <package name="com.qc.demo01.mapper"/>
     </mappers>
 </configuration>
