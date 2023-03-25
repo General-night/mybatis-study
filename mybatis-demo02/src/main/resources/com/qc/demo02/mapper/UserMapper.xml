@@ -4,8 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.demo02.mapper.UserMapper">
     <!--int insertUser(User user);-->
+    <!--<insert id="insertUser">-->
+    <!--    insert into t_user values(null, #{username1}, #{password}, #{age}, #{sex}, #{email})-->
+    <!--</insert>-->
     <insert id="insertUser">
-        insert into t_user values(null, #{username1}, #{password}, #{age}, #{sex}, #{email})
+        insert into t_user values(null, #{user.username1}, #{user.password}, #{user.age}, #{user.sex}, #{user.email})
     </insert>
 
     <!--List<User> getAllUser();-->

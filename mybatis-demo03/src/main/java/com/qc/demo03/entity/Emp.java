@@ -28,5 +28,7 @@ public class Emp {
 
     private String email;
 
+    private Integer did;
+
     private Dept dept;
 }

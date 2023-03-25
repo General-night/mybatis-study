@@ -52,7 +52,8 @@ public interface UserMapper {
      * @param user 用户信息
      * @return 是否添加成功
      */
-    int insertUser(User user);
+    //int insertUser(User user);
+    int insertUser(@Param("user") User user);
 
     /**
      * 验证登录
