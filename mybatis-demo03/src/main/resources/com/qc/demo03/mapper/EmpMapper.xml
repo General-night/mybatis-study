@@ -3,5 +3,67 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.demo03.mapper.EmpMapper">
+    <resultMap id="empResultMap" type="com.qc.demo03.entity.Emp">
+        <id property="eid" column="eid"/>
+        <result property="empName" column="emp_name"/>
+        <!--<result property="email" column="email"/>-->
+        <!--<result property="sex" column="sex"/>-->
+        <!--<result property="age" column="age"/>-->
+        <!--<result property="did" column="did"/>-->
+    </resultMap>
 
+    <select id="getAllEmp" resultMap="empResultMap">
+        select * from t_emp
+    </select>
+
+    <!--List<Emp> getAllEmp();-->
+    <select id="getAllEmpOld" resultType="com.qc.demo03.entity.Emp">
+        <!--select eid, emp_name empName, age, sex, email, did from t_emp-->
+        select * from t_emp
+    </select>
+
+    <!--处理多对一的映射关系方式一：级联属性赋值-->
+    <resultMap id="empAndDeptResultMapOne" type="com.qc.demo03.entity.Emp">
+        <result property="empName" column="emp_name"/>
+        <result property="dept.did" column="did"/>
+        <result property="dept.deptName" column="dept_name"/>
+    </resultMap>
+
+    <!--处理多对一的映射关系方式二：association标签-->
+    <resultMap id="empAndDeptResultMapTwo" type="com.qc.demo03.entity.Emp">
+        <id property="eid" column="eid"/>
+        <result property="empName" column="emp_name"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <association property="dept" javaType="com.qc.demo03.entity.Dept">
+            <id property="did" column="did"/>
+            <result property="deptName" column="dept_name"/>
+        </association>
+    </resultMap>
+
+    <!--Emp getEmpAndDeptByEid(@Param("eid") Integer eid);-->
+    <select id="getEmpAndDeptByEid" resultMap="empAndDeptResultMapTwo">
+        <!--select * from t_emp left join t_dept td on t_emp.did = td.did where eid = #{eid}-->
+        select * from t_dept left join t_emp te on t_dept.did = te.did where eid = #{eid}
+    </select>
+
+
+    <resultMap id="empAndDeptByStepOne" type="com.qc.demo03.entity.Emp">
+        <result property="empName" column="emp_name"/>
+        <association property="dept"
+                     select="com.qc.demo03.mapper.DeptMapper.getEmpAndDeptByStepTow"
+                     column="did"
+                     fetchType="lazy"/>
+    </resultMap>
+
+    <!--Emp getEmpAndDeptByStep(@Param("eid") Integer eid);-->
+    <select id="getEmpAndDeptByStep" resultMap="empAndDeptByStepOne">
+        select * from t_emp where eid = #{eid}
+    </select>
+
+    <!--List<Emp> getEmpByDid(@Param("did") Integer did);-->
+    <select id="getEmpByDid" resultType="com.qc.demo03.entity.Emp">
+        select * from t_emp where did = #{did}
+    </select>
 </mapper>

@@ -5,6 +5,15 @@
 <configuration>
     <properties resource="jdbc.properties"/>
 
+    <!--设置mybatis的全局配置-->
+    <settings>
+        <!--将_自动映射为驼峰，emp_name：empName-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--<setting name="aggressiveLazyLoading" value="true"/>-->
+    </settings>
+
     <typeAliases>
         <package name="com.qc.demo03.entity"/>
     </typeAliases>

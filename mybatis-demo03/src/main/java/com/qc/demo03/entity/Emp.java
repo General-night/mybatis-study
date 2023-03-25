@@ -27,4 +27,6 @@ public class Emp {
     private String sex;
 
     private String email;
+
+    private Dept dept;
 }

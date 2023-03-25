@@ -4,4 +4,43 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.demo03.mapper.DeptMapper">
 
+    <!--Dept getEmpAndDeptByStepTow(@Param("did") Integer did);-->
+    <select id="getEmpAndDeptByStepTow" resultType="com.qc.demo03.entity.Dept">
+        select * from t_dept where did = #{did}
+    </select>
+
+    <resultMap id="deptAndEmpResultMap" type="com.qc.demo03.entity.Dept">
+        <result property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
+        <collection property="empList" ofType="com.qc.demo03.entity.Emp">
+            <id property="eid" column="eid"/>
+            <result property="empName" column="emp_name"/>
+            <result property="age" column="age"/>
+            <result property="sex" column="sex"/>
+            <result property="email" column="email"/>
+            <!--<association property="dept" javaType="com.qc.demo03.entity.Dept">-->
+            <!--    <id property="did" column="did"/>-->
+            <!--    <result property="deptName" column="dept_name"/>-->
+            <!--</association>-->
+        </collection>
+    </resultMap>
+
+    <!--Dept getDeptAndEmpByDid(@Param("did") Integer did);-->
+    <select id="getDeptAndEmpByDid" resultMap="deptAndEmpResultMap">
+        select * from t_dept left join t_emp te on t_dept.did = te.did where t_dept.did = #{did}
+    </select>
+
+    <resultMap id="deptAndEmpByStep" type="com.qc.demo03.entity.Dept">
+        <id property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
+        <collection property="empList"
+                    select="com.qc.demo03.mapper.EmpMapper.getEmpByDid"
+                    column="did"
+                    fetchType="lazy"/>
+    </resultMap>
+
+    <!--Dept getDeptAndEmpByStep();-->
+    <select id="getDeptAndEmpByStep" resultMap="deptAndEmpByStep">
+        select * from t_dept where did = #{did}
+    </select>
 </mapper>

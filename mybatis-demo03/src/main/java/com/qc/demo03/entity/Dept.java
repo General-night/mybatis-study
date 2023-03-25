@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * 部门表
  *
@@ -21,4 +23,6 @@ public class Dept {
     private Integer did;
 
     private String deptName;
+
+    private List<Emp> empList;
 }
