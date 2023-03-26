@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * 员工表
  *
@@ -16,7 +18,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Emp {
+public class Emp implements Serializable {
+
+    private static final long serialVersionUID = 2023032614;
 
     private Integer eid;
 
