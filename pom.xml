@@ -12,6 +12,7 @@
         <module>mybatis-demo01</module>
         <module>mybatis-demo02</module>
         <module>mybatis-demo03</module>
+        <module>mybatis_MBG</module>
     </modules>
 
     <properties>
